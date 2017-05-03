@@ -21,3 +21,18 @@ void setupAccel();
  *        for each axis.
  */
 double[] getGyroOffsets(int samples);
+
+/*
+ * Description: Updates the array with the latest gyroscope
+ *              readings. 
+ * Parameters: float * gr[] - pointer to float array
+ * Return: none
+ */
+void updateRawGyro(float * gr[]);
+
+/* Description: Updates the array with the latest accelerometer
+ *              readings. 
+ * Parameters: float * ac[] - pointer to float array
+ * Return: none
+ */
+void updateRawGyro(float * ac[]);
