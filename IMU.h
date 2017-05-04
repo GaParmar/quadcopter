@@ -35,4 +35,4 @@ void updateRawGyro(float * gr[]);
  * Parameters: float * ac[] - pointer to float array
  * Return: none
  */
-void updateRawGyro(float * ac[]);
+void updateRawAccel(float * ac[]);
