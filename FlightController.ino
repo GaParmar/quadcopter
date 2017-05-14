@@ -3,7 +3,7 @@
 #include "config.h"
 
 double gyroOffsets[3];
-float rawGyro[3];
+double rawGyro[3];
 float rawAccel[3];
 float gyroRPY[3];
 
@@ -21,6 +21,7 @@ void setup()
   //setupAccel();
 
   setGyroOffSets();
+
   setupPinChangeInterrupts();
 }
 
@@ -32,5 +33,9 @@ void loop()
 
 void setupPinChangeInterrupts()
 {
-  //TODO
+  PCIR |= (1<<PCIE0);
+  PCMSK0 |= (1<<PCINT0);
+  PCMSK0 |= (1<<PCINT1);
+  PCMSK0 |= (1<<PCINT2);
+  PCMSK0 |= (1<<PCINT3);
 }

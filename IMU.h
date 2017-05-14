@@ -17,21 +17,22 @@ void setupAccel();
 /*
  * Description: Calculates the gyroscope offests
  * Parameters: int samples - the number of samples to be taken
- * Return: An array of double with calculated gyroscope offsets
- *        for each axis.
+ *             double * gyo[] - An array of double with calculated
+ *                              gyroscope offsets
+ * Return: none
  */
-double[] getGyroOffsets(int samples);
+void getGyroOffsets(int samples, double * gyo[]);
 
 /*
  * Description: Updates the array with the latest gyroscope
- *              readings. 
+ *              readings.
  * Parameters: float * gr[] - pointer to float array
  * Return: none
  */
 void updateRawGyro(float * gr[]);
 
 /* Description: Updates the array with the latest accelerometer
- *              readings. 
+ *              readings.
  * Parameters: float * ac[] - pointer to float array
  * Return: none
  */
