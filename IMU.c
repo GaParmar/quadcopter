@@ -7,13 +7,18 @@
 void setupGyro()
 {
   Wire.beginTransmission(105);
-  Wire.write(0x20);
-  Wire.write(0F);
+  Wire.write(0x6B);
+  Wire.write(0x00);
   Wire.endTransmission();
-  
+
   Wire.beginTransmission(105);
-  Wire.write(0x23);
-  Wire.write(0x90);
+  Wire.write(0x1B);
+  Wire.write(0x08);
+  Wire.endTransmission();
+
+  Wire.beginTransmission(105);
+  Wire.write(0x1A);
+  Wire.write(0x03);
   Wire.endTransmission();
 }
 
@@ -25,7 +30,7 @@ void setupGyro()
  */
 void setupAccel()
 {
-  
+
 }
 
 /*
@@ -38,14 +43,14 @@ double[] getGyroOffsets(int samples);
 
 /*
  * Description: Updates the array with the latest gyroscope
- *              readings. 
+ *              readings.
  * Parameters: float * gr[] - pointer to float array
  * Return: none
  */
 void updateRawGyro(float * gr[]);
 
 /* Description: Updates the array with the latest accelerometer
- *              readings. 
+ *              readings.
  * Parameters: float * ac[] - pointer to float array
  * Return: none
  */

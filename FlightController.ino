@@ -1,5 +1,6 @@
 #include <wire.h>
 #include "IMU.h"
+#include "config.h"
 
 double gyroOffsets[3];
 float rawGyro[3];
@@ -13,19 +14,20 @@ void setup()
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   pinMode(4, OUTPUT);
-  
+
   setupGyro();
   delay(1000);
-  setupAccel();
-  
-  gyroOffsets = getGyroOffSets();
+
+  //setupAccel();
+
+  setGyroOffSets();
   setupPinChangeInterrupts();
 }
 
 void loop()
 {
   updateRawGyro(&rawGyro);
-  updateRawAccel(&rawAccel);
+  //updateRawAccel(&rawAccel);
 }
 
 void setupPinChangeInterrupts()
