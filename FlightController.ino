@@ -15,6 +15,7 @@ void setup()
   pinMode(4, OUTPUT);
   
   setupGyro();
+  delay(1000);
   setupAccel();
   
   gyroOffsets = getGyroOffSets();
