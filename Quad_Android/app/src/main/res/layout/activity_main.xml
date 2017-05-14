@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.quad.gaparmar.quad_android.MainActivity"
+    tools:showIn="@layout/activity_main"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:rotation="90"
+            android:text="Throttle"
+            android:paddingTop="10dp"/>
+        <SeekBar
+            android:id="@+id/seekBarThrottle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="15dp"
+            android:max="999"
+            android:progress="500"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:rotation="90"
+            android:paddingLeft="15dp"
+            android:text="Roll"/>
+        <SeekBar
+            android:id="@+id/seekBarRoll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="15dp"
+            android:max="999"
+            android:layout_marginBottom="0dp"
+            android:progress="500"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:rotation="90"
+            android:paddingLeft="10dp"
+            android:text="Pitch"/>
+        <SeekBar
+            android:id="@+id/seekBarPitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7.5dp"
+            android:layout_marginRight="15dp"
+            android:max="999"
+            android:layout_marginBottom="0dp"
+            android:progress="500"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:rotation="90"
+            android:paddingLeft="15dp"
+            android:text="Yaw"/>
+        <SeekBar
+            android:id="@+id/seekBarYaw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7.5dp"
+            android:layout_marginRight="15dp"
+            android:max="999"
+            android:layout_marginBottom="0dp"
+            android:progress="500"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="40dp"
+        android:onClick="onClickStart"
+        android:rotation="90"
+        android:text="POWER"/>
+
+</LinearLayout>
