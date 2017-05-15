@@ -4,8 +4,9 @@
 
 double gyroOffsets[3];
 double rawGyro[3];
+
 float rawAccel[3];
-float gyroRPY[3];
+double gyro_rpy_in[3];
 
 void setup()
 {
@@ -20,7 +21,7 @@ void setup()
 
   //setupAccel();
 
-  setGyroOffSets();
+  setGyroOffSets(2000, &gyroOffsets[0]); //TODO
 
   setupPinChangeInterrupts();
 }
@@ -29,6 +30,9 @@ void loop()
 {
   updateRawGyro(&rawGyro);
   //updateRawAccel(&rawAccel);
+  int i;
+  for(i=0;i<3;i++)
+    gyro_rpy_in[i] = (gyro_rpy_in[i]*0.9) + ((rawGyro[i]/57.14286)*0.1);
 }
 
 void setupPinChangeInterrupts()

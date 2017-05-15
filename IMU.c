@@ -57,6 +57,10 @@ void getGyroOffsets(int samples, double * gyo)
     *(gyo+1) += gr[1];
     *(gyo+2) += gr[2];
   }
+
+  *(gyo) /= samples;
+  *(gyo+1) /= samples;
+  *(gyo+2) /= samples;
 }
 
 /*
