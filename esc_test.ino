@@ -4,6 +4,13 @@
 // WAIT A COUPLE SECONDS
 // SEND 5
 // YOU'RE GOOD TO GO#include <Servo.h>
+
+// PIN MAPPING:
+// esc white to digital i/o 9
+// esc black to gnd
+// LEAVE red esc pin unconnected
+// 
+// ESC power banana male plugs to the lipo
  
 Servo esc1;
 int throttlePin = 0;
