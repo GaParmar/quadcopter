@@ -7,6 +7,8 @@
  * drone and the bluetooth controller device.
  */
 
+#include <SoftwareSerial.h>
+
 /*
  * Function Name: setupCommunication();
  * Function Prototype: void setupCommunication();
