@@ -1,7 +1,18 @@
+/*
+ * Filename: IMU.h
+ * 
+ * Author: Gaurav Parmar
+ *
+ * Description: Handles all the operations involving the gyroscope and
+ * the accelerometer.
+ */
+
 #include <wire.h>
 #include "config.h"
 
 /*
+ * Function Name: setupGyro();
+ * Function Prototype: void setupGyro();
  * Description: Initializes the I2C communication with the
  *              gyroscope
  * Parameters: none
@@ -28,6 +39,8 @@ void setupGyro()
 }
 
 /*
+ * Function name: setupAccel();
+ * Function prototype: void setupAccel();
  * Description: Initializes the I2C communication with the
  *              accelerometer
  * Parameters: none
@@ -39,14 +52,16 @@ void setupAccel()
 }
 
 /*
+ * Function name: getGyroOffsets();
+ * Function prototype: void getGyroOffsets(int samples, double * gyro[]);
  * Description: Calculates the gyroscope offests
  * Parameters: int samples - the number of samples to be taken
  *             double * gyo[] - An array of double with calculated
  *                              gyroscope offsets
  * Return: none
  */
-void getGyroOffsets(int samples, double * gyo)
-{//TODO CHECK WITH ADAM IF THIS POINTER LOGIV MAKES SENSE//TODO
+void getGyroOffsets(int samples, double * gyro[])
+{
   float gr = {0,0,0};
   updateRawGyro(&gr);
   int i;
@@ -64,12 +79,14 @@ void getGyroOffsets(int samples, double * gyo)
 }
 
 /*
+ * Function name: updateRawGyro();
+ * Function prototype: void updateRawGyro(float * gr[]);
  * Description: Updates the array with the latest gyroscope
  *              readings.
- * Parameters: float * gr - pointer to float array
+ * Parameters: float * gr[] - pointer to float array
  * Return: none
  */
-void updateRawGyro(float * gr)
+void updateRawGyro(float * gr[])
 {
   Wire.beginTransmission(105);
   Wire.write(0x43);
@@ -85,7 +102,10 @@ void updateRawGyro(float * gr)
 
 }
 
-/* Description: Updates the array with the latest accelerometer
+/* 
+ * Function name: updateRawAccel();
+ * Function prototype: void updateRawAccel(float * ac[]);
+ * Description: Updates the array with the latest accelerometer
  *              readings.
  * Parameters: float * ac[] - pointer to float array
  * Return: none
