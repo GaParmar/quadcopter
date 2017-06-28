@@ -58,7 +58,19 @@ void getRawBluetoothString(char * s)
  */
 char * getType(char * s)
 {
-	
+	switch(*s)
+	{
+		case 'r':
+			return "roll";
+		case 'p':
+			return "pitch";
+		case 'y':
+			return "yaw";
+		case 't':
+			return "thrust";
+		default:
+			return "ERROR";
+	}
 }
 
 /*
@@ -69,4 +81,11 @@ char * getType(char * s)
  *		char * s -- The string of current transmission
  * Return - int representing the value of transmission
  */
-int getValue(char * s);
+int getValue(char * s)
+{
+	int Thousands = *(s+1) - 48;
+	int Hundreds = *(s+2) - 48;
+	int Tens = *(s+3) - 48;
+	int Ones = *(s+4) - 48;
+	return (Thousands*1000 + Hundreds*100 + Tens*10 + Ones);
+}
