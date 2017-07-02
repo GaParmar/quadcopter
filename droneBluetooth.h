@@ -50,3 +50,13 @@ char * getType(char * s);
  * Return - int representing the value of transmission
  */
 int getValue(char * s);
+
+/*
+ * Function name: isStart();
+ * Function prototype: byte isStart(char * s);
+ * Description: Checks if the start signal is being sent.
+ * Parameters:
+ *		char * s -- The string of current transmission
+ * Return - 1 if it is START, 0 otherwise.
+ */
+byte isStart(char * s);

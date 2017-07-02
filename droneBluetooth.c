@@ -68,9 +68,33 @@ char * getType(char * s)
 			return "yaw";
 		case 't':
 			return "thrust";
+		case 'P':
+			return "proportional";
+		case 'I':
+			return "integral";
+		case 'D':
+			return "differential";
 		default:
 			return "ERROR";
 	}
+}
+
+/*
+ * Function name: isStart();
+ * Function prototype: byte isStart(char * s);
+ * Description: Checks if the start signal is being sent.
+ * Parameters:
+ *		char * s -- The string of current transmission
+ * Return - 1 if it is START, 0 otherwise.
+ */
+byte isStart(char * s)
+{
+	char * temp = "START";
+	int c = strcmp(s, temp);
+	if (c == 0)
+		return 1;
+	else
+		return 0;
 }
 
 /*
