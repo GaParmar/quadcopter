@@ -1,0 +1,30 @@
+BLUETOOTH:
+1 BYTE/CHAR
+
+data to be sent: 
+
+start motor flag
+1 BYTE
+stop motor flag
+1 BYTE
+start application flag
+1 BYTE
+
+roll 		4 BYTES
+pitch 		4 BYTES
+yaw 		4 BYTES
+throttle 	4 BYTES
+
+p_roll 		4 BYTES
+i_roll  	4 BYTES
+d_roll  	4 BYTES
+
+P_pitch 	4 BYTES
+i_pitch 	4 BYTES
+d_pitch 	4 BYTES
+
+p_yaw 		4 BYTES
+i_yaw 		4 BYTES
+d_yaw 		4 BYTES
+
+67 BYTES per transmission

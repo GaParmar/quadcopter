@@ -37,65 +37,132 @@ void getRawBluetoothString(char * s)
 {
   	if (BTSerial.available())
   	{
-    	*s = BTSerial.read();
-    	*(s+1) = BTSerial.read();
-    	*(s+2) = BTSerial.read();
-    	*(s+3) = BTSerial.read();
-    	*(s+4) = BTSerial.read();
+  		int i = 0;
+  		for (i=0; i<67; i++)
+  			*(s+i) = BTSerial.read();
   	}
   	else
   		s = {'E', 'R', 'R', 'O', 'R'};
 }
 
-/*
- * Function name: getType();
- * Function prototype: char * getType(char * s);
- * Description: Gets the type of communication being recieved by the drone
- *	by parsing the first character.
- * Parameters:
- *		char * s -- The string of current transmission
- * Return - String (char array) representing the type of transmission
- */
-char * getType(char * s)
-{
-	switch(*s)
-	{
-		case 'r':
-			return "roll";
-		case 'p':
-			return "pitch";
-		case 'y':
-			return "yaw";
-		case 't':
-			return "thrust";
-		case 'P':
-			return "proportional";
-		case 'I':
-			return "integral";
-		case 'D':
-			return "differential";
-		default:
-			return "ERROR";
-	}
-}
 
 /*
- * Function name: isStart();
- * Function prototype: byte isStart(char * s);
- * Description: Checks if the start signal is being sent.
- * Parameters:
- *		char * s -- The string of current transmission
- * Return - 1 if it is START, 0 otherwise.
+ * Function name: getPIDRollConstants
+ * Function prototype: void getPIDRollConstants (char * s, int * p, int * i, int * d);
+ * Description: Gets the PID constants for the roll controller
+ * Parameter:
+ *		char * s -- Pointer to the string containing the latest incoming signal
+ *		int * p -- Pointer to the roll proportional constant
+ *		int * i -- Pointer to the roll integral constant
+ *		int * d -- Pointer to the roll differential constant
  */
-byte isStart(char * s)
+void getPIDRollConstants (char * s, int * p, int * i, int * d)
 {
-	char * temp = "START";
-	int c = strcmp(s, temp);
-	if (c == 0)
-		return 1;
-	else
-		return 0;
+	int start = 19;
+	char * propSeg = {s[start], s[start+1], s[start+2], s[start+3]};
+	char * intSeg = {s[start+4], s[start+5], s[start+6], s[start+7]};
+	char * diffSeg = {s[start+8], s[start+9], s[start+10], s[start+11]};
+	int prop = atoi(propSeg);
+	int inte = atoi(intSeg);
+	int diff = atoi(diffSeg);
+	&p = prop;
+	&i = inte;
+	&d = diff;
 }
+
+
+/*
+ * Function name: getPIDPitchConstants
+ * Function prototype: void getPIDPitchConstants (char * s, int * p, int * i, int * d);
+ * Description: Gets the PID constants for the pitch controller
+ * Parameter:
+ *		char * s -- Pointer to the string containing the latest incoming signal
+ *		int * p -- Pointer to the pitch proportional constant
+ *		int * i -- Pointer to the pitch integral constant
+ *		int * d -- Pointer to the pitch differential constant
+ */
+void getPIDPitchConstants (char * s, int * p, int * i, int * d)
+{
+	int start = 31;
+	char * propSeg = {s[start], s[start+1], s[start+2], s[start+3]};
+	char * intSeg = {s[start+4], s[start+5], s[start+6], s[start+7]};
+	char * diffSeg = {s[start+8], s[start+9], s[start+10], s[start+11]};
+	int prop = atoi(propSeg);
+	int inte = atoi(intSeg);
+	int diff = atoi(diffSeg);
+	&p = prop;
+	&i = inte;
+	&d = diff;
+}
+
+
+/*
+ * Function name: getPIDYawConstants
+ * Function prototype: void getPIDYawConstants (char * s, int * p, int * i, int * d);
+ * Description: Gets the PID constants for the yaw controller
+ * Parameter:
+ *		char * s -- Pointer to the string containing the latest incoming signal
+ *		int * p -- Pointer to the yaw proportional constant
+ *		int * i -- Pointer to the yaw integral constant
+ *		int * d -- Pointer to the yaw differential constant
+ */
+void getPIDYawConstants (char * s, int * p, int * i, int * d)
+{
+	int start = 43;
+	char * propSeg = {s[start], s[start+1], s[start+2], s[start+3]};
+	char * intSeg = {s[start+4], s[start+5], s[start+6], s[start+7]};
+	char * diffSeg = {s[start+8], s[start+9], s[start+10], s[start+11]};
+	int prop = atoi(propSeg);
+	int inte = atoi(intSeg);
+	int diff = atoi(diffSeg);
+	&p = prop;
+	&i = inte;
+	&d = diff;
+}
+
+
+/*
+ * Function name: getRoll
+ * Function prototype: void getRoll(char * s, int * roll);
+ * Description: Updates the roll value
+ * Parameters:
+ *		char * s -- Pointer to the string containting the incoming signal
+ *		int * roll -- Pointer to the int storing the roll value
+ */
+void getRoll(char * s, int * roll);
+
+
+/*
+ * Function name: getPitch
+ * Function prototype: void getPitch(char * s, int * pitch);
+ * Description: Updates the pitch value
+ * Parameters:
+ *		char * s -- Pointer to the string containting the incoming signal
+ *		int * pitch -- Pointer to the int storing the pitch value
+ */
+void getPitch(char * s, int * pitch);
+
+
+/*
+ * Function name: getYaw
+ * Function prototype: void getYaw(char * s, int * yaw;
+ * Description: Updates the yaw value
+ * Parameters:
+ *		char * s -- Pointer to the string containting the incoming signal
+ *		int * yaw -- Pointer to the int storing the yaw value
+ */
+void getYaw(char * s, int * Yaw);
+
+
+/*
+ * Function name: getThrottle
+ * Function prototype: void getThrottle(char * s, int * throttle);
+ * Description: Updates the throttle value
+ * Parameters:
+ *		char * s -- Pointer to the string containting the incoming signal
+ *		int * throttle -- Pointer to the int storing the throttle value
+ */
+void getThrottle(char * s, int * throttle);
 
 /*
  * Function name: getValue();

@@ -36,6 +36,12 @@ float P_roll, I_roll, D_roll;
 float P_pitch, I_pitch, D_pitch;
 float P_yaw, I_yaw, D_yaw;
 
+float PID_IN[3];
+float PID_OUT[3];
+float PID_SETPOINT[3];
+
+int FLAGS[3];
+
 
 
 /*
@@ -116,24 +122,9 @@ void loop()
    ***** Updating transmission.        *****
    ***** ***** ***** ***** ***** ***** *****
    */
-  getRawBluetoothString(transmission);
-  switch(getType(transmission))
-  {
-    case "roll":
-      controllerInput[0] = getValue(transmission);
-      break;
-    case "pitch":
-      controllerInput[1] = getValue(transmission);
-      break;
-    case "yaw":
-      controllerInput[2] = getValue(transmission);
-      break;
-    case "thrust":
-      controllerInput[3] = getValue(transmission);
-      break;
-    default:
-      // TODO: maybe go to the next iteration of the loop? 
-  }
+  updateControllerReadings(&controllerInput, &FLAGS); //yet to be implemented
+
+  if 
 }
 
 
@@ -146,10 +137,14 @@ void loop()
  * Description: Updates the controller readings
  * Side Effects: none
  */
-void updateControllerReadings(double * gr[])
+void updateControllerReadings(int * gr[], int * flags[])
 {
   //TODO
   /*
    * The bluetooth code goes here to get readings from the phone
    */
 }
+
+
+
+void PID (double * in, double * out, double * setpoint);
