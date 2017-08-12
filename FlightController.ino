@@ -39,6 +39,8 @@ float P_yaw, I_yaw, D_yaw;
 float PID_IN[3];
 float PID_OUT[3];
 float PID_SETPOINT[3];
+float prev_d_error[3];
+float I_memory[3];
 
 int FLAGS[3];
 
@@ -147,25 +149,18 @@ void updateControllerReadings(int * gr[], int * flags[])
 
 
 
-void PID (double * in, double * out, double * setpoint)
+void PID (double * in, double * setpoint)
 {
   //Roll calculations
   double difference = *in - *setpoint;
-  pid_i_mem_roll += I_roll * difference;
-
-  pid_output_roll = (P_roll * difference) + pid_i_mem_roll + D_roll*(difference - pid_last_roll_d_error);
-  if(pid_output_roll > pid_max_roll)pid_output_roll = pid_max_roll;
-  else if(pid_output_roll < pid_max_roll * -1)pid_output_roll = pid_max_roll * -1;
-
-  pid_last_roll_d_error = pid_error_temp;
+  I_memory[0] += I_roll * difference;
+  PID_OUT[0] = (P_roll * difference) + I_memory[0] + D_roll*(difference - prev_d_error[0]);
+  prev_d_error[0] = difference;
 
   //Pitch calculations
-  pid_error_temp = gyro_pitch_input - pid_pitch_setpoint;
-  pid_i_mem_pitch += pid_i_gain_pitch * pid_error_temp;
-  if(pid_i_mem_pitch > pid_max_pitch)pid_i_mem_pitch = pid_max_pitch;
-  else if(pid_i_mem_pitch < pid_max_pitch * -1)pid_i_mem_pitch = pid_max_pitch * -1;
-
-  pid_output_pitch = pid_p_gain_pitch * pid_error_temp + pid_i_mem_pitch + pid_d_gain_pitch * (pid_error_temp - pid_last_pitch_d_error);
+  difference = *(in+1) - *(setpoint+1);
+  I_memory[1] += I_pitch * difference;
+  PID_OUT[1] = P_pitch * difference + pid_i_mem_pitch + pid_d_gain_pitch * (pid_error_temp - pid_last_pitch_d_error);
   if(pid_output_pitch > pid_max_pitch)pid_output_pitch = pid_max_pitch;
   else if(pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
 
