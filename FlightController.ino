@@ -160,21 +160,12 @@ void PID (double * in, double * setpoint)
   //Pitch calculations
   difference = *(in+1) - *(setpoint+1);
   I_memory[1] += I_pitch * difference;
-  PID_OUT[1] = P_pitch * difference + pid_i_mem_pitch + pid_d_gain_pitch * (pid_error_temp - pid_last_pitch_d_error);
-  if(pid_output_pitch > pid_max_pitch)pid_output_pitch = pid_max_pitch;
-  else if(pid_output_pitch < pid_max_pitch * -1)pid_output_pitch = pid_max_pitch * -1;
-
-  pid_last_pitch_d_error = pid_error_temp;
+  PID_OUT[1] = (P_pitch * difference) + I_memory[1] + D_pitch*(difference - prev_d_error[1]);
+  prev_d_error[1] = difference;
 
   //Yaw calculations
-  pid_error_temp = gyro_yaw_input - pid_yaw_setpoint;
-  pid_i_mem_yaw += pid_i_gain_yaw * pid_error_temp;
-  if(pid_i_mem_yaw > pid_max_yaw)pid_i_mem_yaw = pid_max_yaw;
-  else if(pid_i_mem_yaw < pid_max_yaw * -1)pid_i_mem_yaw = pid_max_yaw * -1;
-
-  pid_output_yaw = pid_p_gain_yaw * pid_error_temp + pid_i_mem_yaw + pid_d_gain_yaw * (pid_error_temp - pid_last_yaw_d_error);
-  if(pid_output_yaw > pid_max_yaw)pid_output_yaw = pid_max_yaw;
-  else if(pid_output_yaw < pid_max_yaw * -1)pid_output_yaw = pid_max_yaw * -1;
-
-  pid_last_yaw_d_error = pid_error_temp;
+  difference = gyro_yaw_input - pid_yaw_setpoint;
+  I_memory[2] += I_yaw * difference;
+  PID_OUT[2] = (P_yaw*difference) + I_memory[2] + D_yaw*(difference - prev_d_error[2]);
+  prev_d_error[2] = difference;
 }
